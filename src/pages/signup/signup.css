@@ -1,0 +1,33 @@
+.login-container {
+  @apply h-screen w-full min-h-fit  overflow-hidden;
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/883/883/818/movie-collage-wallpaper-preview.jpg");
+  background-repeat: repeat;
+}
+.login-form {
+  @apply flex flex-col gap-4 w-[400px] h-[80%] mx-auto;
+}
+
+.logo {
+  @apply font-extrabold text-red-600 text-6xl mb-5;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 3px;
+}
+
+.css-1r74e2h-MuiFormLabel-root-MuiInputLabel-root {
+  color: rgba(252, 252, 252, 0.564) !important;
+  z-index: 200 !important;
+}
+
+.css-18nu0jg-MuiFormLabel-root-MuiInputLabel-root {
+  color: rgba(252, 252, 252, 0.564) !important;
+  z-index: 200 !important;
+  padding-left: 20px !important;
+  padding-top: 10px !important;
+}
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  color: white !important;
+  @apply !bg-[#3d3c3c] !pt-5;
+}
+.css-1d1r5q-MuiFormHelperText-root {
+  color: rgb(233, 100, 17) !important;
+}

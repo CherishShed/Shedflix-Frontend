@@ -12,10 +12,11 @@ function Home() {
   const [user, setUser] = useState<userType | null>(null);
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api", {
+      .get("http://localhost:8081/api/userDetails", {
         headers: { Authorization: localStorage.getItem("accessToken") },
       })
       .then((userDetails) => {
+        console.log(userDetails.data);
         setUser(userDetails.data.user);
       });
   }, []);

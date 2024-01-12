@@ -1,0 +1,13 @@
+.login-container {
+  @apply h-screen w-full;
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/883/883/818/movie-collage-wallpaper-preview.jpg");
+}
+.login-form {
+  @apply flex flex-col gap-4 w-[400px] h-[80%] mx-auto;
+}
+
+.logo {
+  @apply font-extrabold text-red-600 text-6xl mb-7;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 3px;
+}
