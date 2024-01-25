@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: black;
+  color: white;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: red;
+}
+
+.movie-card {
+  @apply min-w-[150px] h-[150px] rounded-sm relative overflow-hidden;
+  transition: all 0.3s ease-in-out;
+}
+.movie-card-overlay {
+  display: none;
+  transition: all 0.3s ease-in-out;
+  @apply absolute top-0 w-full h-full bg-[rgb(0,0,0,0.4)];
+}
+.movie-card p {
+  transform: translateY(50px);
+  transition: all 0.3s ease-in-out;
+}
+.movie-card:hover p {
+  transform: translateY(-20px);
+}
+.movie-card:hover .movie-card-overlay {
+  display: flex;
+}

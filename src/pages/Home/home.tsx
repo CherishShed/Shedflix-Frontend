@@ -1,6 +1,8 @@
-import { Outlet } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Hero from "../../components/hero";
+import MovieRow from "../../components/movieRow";
+import endPoints from "../../services/movieService";
 export type userType = {
   _id: string;
   user_name: string;
@@ -9,7 +11,9 @@ export type userType = {
   last_name: string;
 };
 function Home() {
+  console.log(endPoints["popular"]);
   const [user, setUser] = useState<userType | null>(null);
+  const movieLists = ["popular", "topRated", "upcoming"];
   useEffect(() => {
     axios
       .get("http://localhost:8081/api/userDetails", {
@@ -22,10 +26,13 @@ function Home() {
   }, []);
   return (
     <div>
-      Home
       <nav className="flex gap-4 text-red-500"></nav>
-      <p>{user?.user_name}</p>
-      <Outlet />
+      <Hero />
+      <section>
+        {movieLists.map((movieList, index) => (
+          <MovieRow title={movieList} url={endPoints[movieList]} key={index} />
+        ))}
+      </section>
     </div>
   );
 }
