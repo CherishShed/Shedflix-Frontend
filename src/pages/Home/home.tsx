@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Hero from "../../components/hero";
 import MovieRow from "../../components/movieRow";
 import endPoints from "../../services/movieService";
@@ -13,6 +13,7 @@ export type userType = {
   last_name: string;
 };
 function Home() {
+  const [show, setShow] = useState(false);
   console.log(endPoints["popular"]);
   const setUser = userStore((store) => store.loginUser);
   const movieLists = ["popular", "topRated", "upcoming"];

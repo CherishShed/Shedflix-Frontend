@@ -33,6 +33,12 @@ body {
 .movie-card:hover p {
   transform: translateY(-20px);
 }
+.like-icon {
+  @apply !invisible absolute right-3 top-2 z-[1000] transition-all;
+}
+.movie-card:hover .like-icon {
+  @apply !visible;
+}
 .movie-card:hover .movie-card-overlay {
   display: flex;
 }

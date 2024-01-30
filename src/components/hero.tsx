@@ -1,6 +1,7 @@
 import axios from "axios";
 import endPoints from "../services/movieService";
 import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 // const key = import.meta.env.VITE_TMDB_KEY as string;
 export type MovieObject = {
   adult: boolean;
@@ -32,7 +33,22 @@ function Hero() {
   }, []);
   return (
     <>
-      {movie && (
+      {!movie ? (
+        <div className="w-full h-screen relative flex justify-between">
+          <CircularProgress
+            color="primary"
+            className="!w-[150px] !h-[150px] !mt-[40%] !mx-auto block md:!mt-[20%] md:flex "
+          />
+          <CircularProgress
+            color="secondary"
+            className="!hidden md:!w-[150px] md:!h-[150px] md:!mx-auto md:!mt-[20%] md:!block"
+          />
+          <CircularProgress
+            color="warning"
+            className="!hidden md:!w-[150px] md:!h-[150px] md:!mx-auto md:!mt-[20%] md:!block"
+          />
+        </div>
+      ) : (
         <div className="w-full h-screen relative">
           <img
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
