@@ -1,8 +1,9 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 import { useState } from "react";
 import { TextField } from "@mui/material";
+import { snackBarStore } from "../../context/states";
 export type formDataType = {
   userName: string;
   firstName: string;
@@ -26,6 +27,7 @@ function Signup() {
     lastNameHelperText: "",
   });
   const navigate = useNavigate();
+  const openSnackBar = snackBarStore((store) => store.openSnackBar);
   return (
     <div className="login-container">
       <div className="login-overlay bg-[rgb(0,0,0,0.6)] h-screen w-full p-6">
@@ -154,16 +156,20 @@ function Signup() {
             className="bg-red-600 p-4 rounded-md text-white"
             type="submit"
             onClick={async () => {
-              const response = await axios.post(
-                "http://localhost:8081/api/signup",
-                formData
-              );
-              console.log(response);
-              if (response.data.auth) {
-                console.log(response.data.user);
-                navigate("/login");
-              } else {
-                console.log(response.data.message);
+              try {
+                const response = await axios.post(
+                  "http://localhost:8081/api/signup",
+                  formData
+                );
+                console.log(response);
+                if (response.data.auth) {
+                  console.log(response.data.user);
+                  navigate("/login");
+                  openSnackBar("Please Login with details", "success");
+                }
+              } catch (error) {
+                console.log(error);
+                openSnackBar(error.response.data.message, "error");
               }
             }}
           >

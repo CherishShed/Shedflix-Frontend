@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import { useState } from "react";
 import { TextField } from "@mui/material";
+import { snackBarStore } from "../../context/states";
 function Login() {
   const [formData, setFormData] = useState({
     userName: "",
@@ -17,6 +18,7 @@ function Login() {
     emailHelperText: "",
   });
   const navigate = useNavigate();
+  const openSnackBar = snackBarStore((store) => store.openSnackBar);
   return (
     <div className="login-container">
       <div className="login-overlay bg-[rgb(0,0,0,0.6)] h-screen w-full p-6">
@@ -91,16 +93,21 @@ function Login() {
             className="bg-red-600 p-4 rounded-md text-white"
             type="submit"
             onClick={async () => {
-              const response = await axios.post(
-                "http://localhost:8081/api/login",
-                formData
-              );
-              console.log(response);
-              localStorage.setItem(
-                "accessToken",
-                `Bearer ${response.data.accessToken}`
-              );
-              navigate("/");
+              try {
+                const response = await axios.post(
+                  "http://localhost:8081/api/login",
+                  formData
+                );
+                console.log(response);
+                localStorage.setItem(
+                  "accessToken",
+                  `Bearer ${response.data.accessToken}`
+                );
+                openSnackBar("Login Successful", "success");
+                navigate("/");
+              } catch (error) {
+                openSnackBar(error.response.data.message, "error");
+              }
             }}
           >
             Sign In
