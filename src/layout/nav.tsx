@@ -85,7 +85,7 @@ function Nav() {
               {user?.first_name} {user?.last_name}
             </p>
             <MenuItem>
-              <Link to={"/profile"}>Profile</Link>
+              <Link to={"/profile"}>My List</Link>
             </MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem

@@ -3,6 +3,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useState } from "react";
 import { userService } from "../services/userServices";
 import { snackBarStore, userStore } from "../context/states";
+import { useNavigate } from "react-router-dom";
 function MovieCard({
   id,
   title,
@@ -14,17 +15,30 @@ function MovieCard({
 }) {
   const openSnackBar = snackBarStore((store) => store.openSnackBar);
   const user = userStore((store) => store.user);
-  const [liked, setLiked] = useState(() => user?.favourites.includes(id));
+  const loginUser = userStore((store) => store.loginUser);
+  const isAuthenticated = userStore((store) => store.isAuthenticated);
+  const navigate = useNavigate();
+
+  const [liked, setLiked] = useState(() =>
+    user?.favourites.some((obj) => obj.id == id)
+  );
   return (
-    <div className="movie-card relative">
+    <div className="movie-card relative rounded-lg">
       {!liked ? (
         <StarBorderIcon
           className="like-icon"
           titleAccess="Add to Favourites"
           onClick={async () => {
+            if (!isAuthenticated) {
+              return navigate("/login");
+            }
             try {
-              const result = await userService.addToFavourites(id);
-              console.log(result);
+              const result = await userService.addToFavourites({
+                id,
+                title,
+                poster_path,
+              });
+
               setLiked(!liked);
               openSnackBar(result.message as string, "success");
             } catch (error) {
@@ -43,8 +57,20 @@ function MovieCard({
           titleAccess="Remove from Favourites"
           color="error"
           onClick={async () => {
+            if (!isAuthenticated) {
+              return navigate("/login");
+            }
             try {
               const result = await userService.removeFromFavourites(id);
+              loginUser({
+                first_name: user!.first_name,
+                id: user!.id,
+                last_name: user!.last_name,
+                user_name: user!.user_name,
+                favourites: user!.favourites.filter(
+                  (movieid) => movieid.id != id
+                ),
+              });
               console.log(result);
               setLiked(!liked);
               openSnackBar(result.message as string, "success");

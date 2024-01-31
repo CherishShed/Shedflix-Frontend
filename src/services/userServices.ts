@@ -1,10 +1,18 @@
 import axios from "axios";
 
 export const userService = {
-  addToFavourites: async (id: number) => {
+  addToFavourites: async ({
+    id,
+    title,
+    poster_path,
+  }: {
+    id: number;
+    title: string;
+    poster_path: string;
+  }) => {
     const result = await axios.put(
-      `http://localhost:8081/api/favourites/${id}`,
-      null,
+      `http://localhost:8081/api/favourites`,
+      { id, title, poster_path },
       {
         headers: { Authorization: localStorage.getItem("accessToken") },
       }

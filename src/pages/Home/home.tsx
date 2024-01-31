@@ -7,7 +7,7 @@ export type userType = {
   user_name: string;
   first_name: string;
   last_name: string;
-  favourites: number[];
+  favourites: { id: number; title: string; poster_path: string }[];
 };
 function Home() {
   const movieLists = ["popular", "topRated", "upcoming"];
