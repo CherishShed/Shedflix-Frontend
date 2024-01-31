@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { snackBarStore, userStore } from "../context/states";
 import {
   Tooltip,
@@ -24,11 +24,22 @@ function Nav() {
   const isAuthenticated = userStore((store) => store.isAuthenticated);
   const logoutUser = userStore((store) => store.logoutUser);
   const openSnackBar = snackBarStore((store) => store.openSnackBar);
+  const setUser = userStore((store) => store.loginUser);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8081/api/userDetails", {
+        headers: { Authorization: localStorage.getItem("accessToken") },
+      })
+      .then((userDetails) => {
+        console.log(userDetails.data);
+        setUser(userDetails.data.user);
+      });
+  }, []);
   return (
     <nav className="flex items-center !bg-transparent absolute top-0 z-20 justify-between p-2 px-5 w-full">
-      <h1 className="logo m-0 !bg-transparent">
+      <Link to={"/"} className="logo m-0 !bg-transparent">
         S<span className="text-5xl">HEDFLI</span>X
-      </h1>
+      </Link>
       {!isAuthenticated ? (
         <div className="flex gap-2">
           <Link

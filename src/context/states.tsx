@@ -60,7 +60,6 @@ export const snackBarStore = create<snackBarType>()((set) => ({
         }
         store.message = "";
         store.open = false;
-        store.severity = "";
       })
     );
   },

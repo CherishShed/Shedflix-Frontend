@@ -42,3 +42,7 @@ body {
 .movie-card:hover .movie-card-overlay {
   display: flex;
 }
+
+.profile-hero {
+  background-image: url("https://w0.peakpx.com/wallpaper/663/269/HD-wallpaper-movie-poster-poster-collage-movie-cg.jpg");
+}

@@ -66,7 +66,7 @@ function Hero() {
                 Play
               </button>
               <button className="p-4 bg-transparent text-white border border-white w-32 rounded-sm">
-                Watch later
+                More Info
               </button>
             </div>
             <p className="text-sm text-gray-300">{movie.release_date}</p>

@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 import { useState } from "react";
@@ -39,6 +39,7 @@ function Signup() {
           <div className="mb-10 flex flex-col gap-5">
             <div className="flex gap-3">
               <TextField
+                name="firstName"
                 label="First Name"
                 variant="standard"
                 color="warning"
@@ -65,6 +66,7 @@ function Signup() {
                 }}
               />
               <TextField
+                name="lastName"
                 label="Last Name"
                 variant="standard"
                 color="warning"
@@ -94,6 +96,7 @@ function Signup() {
             <TextField
               value={formData.userName}
               type="email"
+              name="email"
               label={"Email"}
               className="rounded-sm !transition-all"
               color="warning"

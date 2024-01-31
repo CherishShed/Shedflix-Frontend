@@ -10,7 +10,6 @@ function MovieRow({ title, url }: { title: string; url: string }) {
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data.results);
         setMovieList(response.data.results);
       })
       .catch((error) => console.log(error));
